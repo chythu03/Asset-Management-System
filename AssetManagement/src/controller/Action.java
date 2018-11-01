@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.user;
+
 
 /**
  * Servlet implementation class Action
@@ -32,6 +33,7 @@ public class Action extends HttpServlet{
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out=response.getWriter();
 		String function;
 		String name=request.getParameter("name");
 		String category=request.getParameter("category");
@@ -45,18 +47,16 @@ public class Action extends HttpServlet{
 			AdminAction obj=(AdminAction)session.getAttribute("userObj");
 			switch(function)
 			{
-				case "create":obj.create(name,category);
-							RequestDispatcher view=request.getRequestDispatcher("AdminCreate.jsp");
-							view.include(request, response);
+				case "create":obj.create(name,category);							 
+							  RequestDispatcher view=request.getRequestDispatcher("AdminCreate.jsp");
+							  view.include(request, response);
+							  out.println("<script>");
+							  out.println("alert(\"Product Created\");");
+							  out.println("</script>");
 				default:
 			}
 		}
-		if(actor.equalsIgnoreCase("Audit Manager")) {
-			AuditorAction obj=(AuditorAction)session.getAttribute("userObj");
-		}
-		if(actor.equalsIgnoreCase("Staff")) {
-			StaffAction obj=(StaffAction)session.getAttribute("userObj");		
-		}
+
 		
 		
 
