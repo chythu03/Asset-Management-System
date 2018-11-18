@@ -259,7 +259,7 @@ public class AuditorAction extends user{
 				user_id="0000"+user_id;
 			if(super.getId()>9 && super.getId()<100)
 				user_id="000"+user_id;
-			ps.setString(5,user_id);
+			
 			ps.setString(6,user_id);
 			ps.setString(7, datetime);
 			ps.executeUpdate();

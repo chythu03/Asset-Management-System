@@ -11,7 +11,7 @@
 <title>AddAsset</title>
     
     <link rel="stylesheet" href="design1.2.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div class="homepage">
@@ -52,13 +52,13 @@
             </li>
             <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</a>
             <ul class="sub1">
-            <li><a href="#">Status</a></li>
-                 <li><a href="#">Location</a></li>
+            <li><a href="index1.10.jsp">Status</a></li>
+                 <li><a href="index1.11.jsp">Location</a></li>
             </ul>
             
             <li><a href="#"><i class="fa fa-flag" aria-hidden="true"></i> Report</a>
              <ul class="sub1">
-               <li><a href="#">Date</a></li>
+               <li><a href="index1.12.jsp">Date</a></li>
             <li><a href="index1.13.jsp">AssetId</a></li>
                  <li><a href="index1.14.jsp">StaffId</a></li>
                 
