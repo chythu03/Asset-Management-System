@@ -59,11 +59,11 @@ try {
 			
 			
 			frdt=frdt+" 00:00:00";
-			System.out.println(frdt);
+			
 					
 			todt=todt+" 24:59:59";
-			System.out.println(frdt);
-			String sql1="Select asset_id,tolocation,toroom,time,userid from location where time>=? and time<=?";
+			
+			String sql1="Select asset_id,tolocation,toRoom,time,userid from location where time>=? and time<=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1,frdt);
 			ps.setString(2,todt);

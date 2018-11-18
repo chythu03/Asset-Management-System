@@ -173,6 +173,7 @@ public class Action extends HttpServlet{
 				case "UpdateLocation":String asset5=request.getParameter("asset_id");
 									String loc=request.getParameter("location");
 									String room=request.getParameter("room");
+									
 									String res7=obj.updateLocation(asset5,loc,room);
 									out.println("<script>");
 									out.println(" alert(\""+res7+"\");");

@@ -249,6 +249,7 @@ public class AdminAction extends user{
 	}
 	String updateLocation(String asset_id,String location,String room)
 	{
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
@@ -271,7 +272,6 @@ public class AdminAction extends user{
 			int num=Integer.parseInt(res);
 			num=num+1;
 			id1=letter+num;
-			System.out.println("trans id ="+id1);
 			
 			sql="Select prod_id from assets where asset_id=?";
 			ps=(PreparedStatement) con.prepareStatement(sql);
@@ -279,7 +279,7 @@ public class AdminAction extends user{
 			rs=ps.executeQuery();
 			while(rs.next())
 				id=rs.getString(1);
-			System.out.println("prod id ="+id);
+			
 			
 			sql="insert into location values(?,?,?,?,?,?,?)";
 			ps=(PreparedStatement) con.prepareStatement(sql);
@@ -289,17 +289,18 @@ public class AdminAction extends user{
 			ps.setString(2,id);
 			ps.setString(3,asset_id);
 			ps.setString(4,location);
+			System.out.println(room);
 			ps.setString(5,room);
 			String user_id=Integer.toString(super.getId());
 			if(super.getId()<10)
 				user_id="0000"+user_id;
 			if(super.getId()>9 && super.getId()<100)
 				user_id="000"+user_id;
-			ps.setString(5,user_id);
+			
 			ps.setString(6,user_id);
 			ps.setString(7, datetime);
 			ps.executeUpdate();
-			System.out.println("inserted in location ");
+			
 			
 			sql="update assets set location=?, room=? where asset_id=? ";
 			ps=(PreparedStatement) con.prepareStatement(sql);
@@ -307,7 +308,7 @@ public class AdminAction extends user{
 			ps.setString(2, room);
 			ps.setString(3,asset_id);
 			ps.executeUpdate();
-			System.out.println("updated in assets");
+			
 			con.commit();
 			con.close();
 			return "Updated";
