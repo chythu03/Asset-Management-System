@@ -112,7 +112,7 @@
           
              <div class="inputBox1">
                  <label>Count</label>
-          <input type="number" name="count" max="100" min="0" ="" required name="count">
+          <input type="number" name="count" max="100" min="0"  required name="count">
                  
           </div>
            <div class="sub">

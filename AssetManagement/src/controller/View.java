@@ -21,15 +21,19 @@ public class View {
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();
-			while(rs.next())
+			while(rs.next()) {
 				status=rs.getString(1);
+
+			}
 			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			status="error occured";
+			
 			return status;
 		}
+		
 		return status;
 	}
 	String ViewLocation(String id)
@@ -69,9 +73,9 @@ public class View {
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
 			ResultSet rs=ps.executeQuery();
-			while(rs.next())
+			while(rs.next()) {
 				asset=rs.getString(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6)+" "+rs.getTimestamp(7);
-			
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

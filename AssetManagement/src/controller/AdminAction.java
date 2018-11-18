@@ -26,9 +26,20 @@ public class AdminAction extends user{
 			String pass="lokesh1999";
 			String res="";
 			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
-			String sql1="Select prod_id from products";
+			
+			String sql1="select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
+			ps.setString(1, name);
 			ResultSet rs=ps.executeQuery();
+			while(rs.next())
+				res=rs.getString(1);
+			
+			if(res!=null)
+				return "Product already Exist";
+			
+			sql1="Select max(prod_id) from products";
+			ps=(PreparedStatement) con.prepareStatement(sql1);
+			rs=ps.executeQuery();
 			while(rs.next())
 				res=rs.getString(1);
 			
@@ -38,6 +49,9 @@ public class AdminAction extends user{
 			num=num+1;
 			String id=letter+num;
 			System.out.println(id);
+			
+			
+			
 			String sql="Insert into products values(?,?,?)";
 			ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, id);
@@ -68,7 +82,7 @@ public class AdminAction extends user{
 			while(rs.next())
 				id=rs.getString(1);
 			
-			String sql1="Select asset_id from assets";
+			String sql1="Select max(asset_id) from assets";
 			ps=(PreparedStatement) con.prepareStatement(sql1);
 			rs=ps.executeQuery();
 			while(rs.next())
@@ -79,6 +93,7 @@ public class AdminAction extends user{
 			int num=Integer.parseInt(res);
 			num=num+1;
 			String id1=letter+num;
+			System.out.println(id1);
 			sql="insert into assets values(?,?,?,?,?,?,?)";//2018-10-30 23:52:48
 			ps=(PreparedStatement) con.prepareStatement(sql);
 			
