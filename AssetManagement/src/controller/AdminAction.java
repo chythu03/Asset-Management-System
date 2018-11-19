@@ -24,7 +24,7 @@ public class AdminAction extends user{
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
 			String pass="lokesh1999";
-			String res="";
+			String res=null;
 			Connection con=(Connection) DriverManager.getConnection(url,user,pass);//creating database connection
 			
 			String sql1="select prod_id from products where product=?";
@@ -33,7 +33,7 @@ public class AdminAction extends user{
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 				res=rs.getString(1);
-			
+			System.out.println("duplicate: "+res);
 			if(res!=null)
 				return "Product already Exist";
 			
