@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+/**
+ * @author Admin
+ */
 
 /**
  * Servlet implementation class Action
@@ -74,7 +76,7 @@ public class Action extends HttpServlet{
 			AdminAction obj=(AdminAction)session.getAttribute("userObj");
 			switch(function)
 			{
-				case "create":
+				case "create"://taking asset name,category as inputs 
 								String name=request.getParameter("assetname");
 								String category=request.getParameter("category");
 								String res1=obj.create(name,category);
@@ -82,7 +84,7 @@ public class Action extends HttpServlet{
 							  view.include(request, response);
 							  if(res1==null)
 							  {
-								  out.println("<script>");
+								  out.println("<script>");//alert message box used for showing that asset is created or not
 								  out.println(" alert(\"error occured\");");
 								  out.println("</script>");
 							  }

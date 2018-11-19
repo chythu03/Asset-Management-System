@@ -289,8 +289,8 @@ public class AuditorAction extends user{
 			String pass="lokesh1999";
 
 			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
-			con.setAutoCommit(false);
-			
+			con.setAutoCommit(false);//do not auto commit
+			//removing asset transactions every where
 			
 			String sql="delete from location where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
@@ -306,7 +306,7 @@ public class AuditorAction extends user{
 			ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, asset_id);
 			ps.executeUpdate();
-			con.commit();
+			con.commit();//commit
 			con.close();
 			return "Removed";
 			

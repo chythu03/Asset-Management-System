@@ -20,12 +20,12 @@ public class AdminAction extends user{
 	String create(String name,String category)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");//loading jdbc driver
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
 			String pass="lokesh1999";
 			String res="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			Connection con=(Connection) DriverManager.getConnection(url,user,pass);//creating database connection
 			
 			String sql1="select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
@@ -273,20 +273,21 @@ public class AdminAction extends user{
 			String res="error occured";
 			String id="";
 			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
-			con.setAutoCommit(false);
+			con.setAutoCommit(false);//Do not Auto commit
 			String sql="Select max(TransID) from location";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 			{
-				res=rs.getString(1);
+				res=rs.getString(1);//calculating previous Maximum Trans ID stored
 			}
+			
 			String letter=res.substring(0,1);
 			res=res.substring(1);
 			String id1="";
 			int num=Integer.parseInt(res);
 			num=num+1;
-			id1=letter+num;
+			id1=letter+num;//creating new Asset Id
 			
 			sql="Select prod_id from assets where asset_id=?";
 			ps=(PreparedStatement) con.prepareStatement(sql);
@@ -324,7 +325,7 @@ public class AdminAction extends user{
 			ps.setString(3,asset_id);
 			ps.executeUpdate();
 			
-			con.commit();
+			con.commit();//commit transaction
 			con.close();
 			return "Updated";
 		}catch(Exception e)
