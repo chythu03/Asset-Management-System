@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.*;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -55,7 +56,7 @@ public class main extends HttpServlet {
 		try {
 			HttpSession session=request.getSession();
 			session.setMaxInactiveInterval(1000000);
-			
+			PrintWriter out=response.getWriter();
 			//Class.forName("com.mysql.cj.jdbc.Driver");
 			int id=Integer.parseInt(request.getParameter("username"));
 			String password=request.getParameter("password");
@@ -101,11 +102,16 @@ public class main extends HttpServlet {
 			}
 			else
 			{	
-				session.setAttribute("actor", actor);
+				//session.setAttribute("actor", actor);
+			
+				RequestDispatcher view=request.getRequestDispatcher("index.html");
+				view.forward(request, response);
+				
 			}
 			
 			RequestDispatcher view=request.getRequestDispatcher("MainView.jsp");
 			view.forward(request, response);
+			
 						
 			con.close();
 		} catch (Exception e) {
