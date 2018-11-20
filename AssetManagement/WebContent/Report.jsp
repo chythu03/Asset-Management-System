@@ -1,7 +1,8 @@
-<%@page import="java.sql.ResultSet"%>
-<%@page import="com.mysql.jdbc.PreparedStatement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="com.mysql.jdbc.Connection"%>
+
+<%@page import="java.sql.*"%>
+<%@page import="javax.naming.*" %>
+<%@page import="javax.sql.*"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -12,17 +13,23 @@
 </head>
 <body>
 <%
+Context ctx;
+DataSource ds;
+Connection con;
+Statement stmt;
+ResultSet rs;
+
 String function=(String)session.getAttribute("function");
 try {
-		Class.forName("com.mysql.jdbc.Driver");
+/* 		Class.forName("com.mysql.jdbc.Driver");
 		String url="jdbc:mysql://localhost:3306/asset";
 		String user="root";
 		String pass="lokesh1999";
-		Connection con=(Connection) DriverManager.getConnection(url,user,pass);
-		if(function.equalsIgnoreCase("ReportByDate"))
-		{
-			
-		}
+		Connection con=(Connection) DriverManager.getConnection(url,user,pass); */
+		ctx=new InitialContext();
+		ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+		con=ds.getConnection();
+		con.setAutoCommit(false);
 		if(function.equalsIgnoreCase("ReportByAssetId"))
 		{
 			String sql1="Select tolocation,toroom,time from location where asset_id=?";
@@ -30,11 +37,14 @@ try {
 			System.out.println(asset_id);
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1,asset_id);
-			ResultSet rs=ps.executeQuery();
+			rs=ps.executeQuery();
 			/*out.println("<table class=\"table\">");
 			out.println(" <tbody>");*/
 			out.println("<h1>Report of "+asset_id+"</h1>");
 			out.println("<h3>Shifting</h3>");
+			
+			
+			
 			while(rs.next())
 			{
 				out.println("<h5>"+rs.getString(1)+" - "+rs.getString(2)+" - "+rs.getString(3)+"</h5>");
@@ -45,9 +55,10 @@ try {
 			ps.setString(1,asset_id);
 			rs=ps.executeQuery();
 			out.println("<h3>Status</h3>");
+			
 			while(rs.next())
 				out.println("<h5>"+rs.getString(1)+" - "+rs.getString(2)+"</h5>");
-			
+	
 		}
 		if(function.equalsIgnoreCase("ReportByStaffId"))
 		{
@@ -55,7 +66,7 @@ try {
 			String staff_id=(String)session.getAttribute("staff_id");
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1,staff_id);
-			ResultSet rs=ps.executeQuery();
+			rs=ps.executeQuery();
 			/*out.println("<table class=\"table\">");
 			out.println(" <tbody>");*/
 			out.println("<h1>Report of "+staff_id+"</h1>");
@@ -88,7 +99,7 @@ try {
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1,frdt);
 			ps.setString(2,todt);
-			ResultSet rs=ps.executeQuery();
+			rs=ps.executeQuery();
 			/*out.println("<table class=\"table\">");
 			out.println(" <tbody>");*/
 			out.println("<h1>Report from "+frdt+" to "+todt+"</h1>");

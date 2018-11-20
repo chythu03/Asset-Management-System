@@ -160,7 +160,7 @@ public class Action extends HttpServlet{
 							out.println("<script>");
 							out.println(" alert(\""+res5+"\");");
 							out.println("</script>");
-							view=request.getRequestDispatcher("index1.2.jsp");
+							view=request.getRequestDispatcher("index1.3.jsp");
 							view.include(request, response);
 							break;
 				case "UpdateStatus":String asset4=request.getParameter("asset_id");

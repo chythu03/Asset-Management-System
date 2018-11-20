@@ -1,26 +1,35 @@
 package controller;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.*;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 public class View {
-	
+	Context ctx;
+    DataSource ds;
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
 	String ViewStatus(String id)
 	{
 		String status="";
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			/*Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
 			String pass="lokesh1999";
 			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			*/
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			java.sql.Connection con=ds.getConnection();
+			con.setAutoCommit(false);
 			String sql1="Select status from assets where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
-			ResultSet rs=ps.executeQuery();
+			rs=ps.executeQuery();
 			while(rs.next()) {
 				status=rs.getString(1);
 
@@ -40,11 +49,15 @@ public class View {
 	{
 		String location="";
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			/*Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
 			String pass="lokesh1999";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			Connection con=(Connection) DriverManager.getConnection(url,user,pass);*/
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			java.sql.Connection con=ds.getConnection();
+			con.setAutoCommit(false);
 			String sql1="Select location,room from assets where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
@@ -64,11 +77,15 @@ public class View {
 	{
 		String asset="";
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			/*Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
 			String pass="lokesh1999";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			Connection con=(Connection) DriverManager.getConnection(url,user,pass);*/
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			java.sql.Connection con=ds.getConnection();
+			con.setAutoCommit(false);
 			String sql1="Select * from assets where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);

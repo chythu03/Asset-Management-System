@@ -1,17 +1,19 @@
 package controller;
+import java.sql.*;
+import javax.naming.*;
+import javax.sql.*;
 
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
 
 import model.user;
 
 public class AdminAction extends user{
-	
+	Context ctx;
+    DataSource ds;
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
 	public AdminAction(int id, String name, String actor) {
 		super(id, name, actor);
 		// TODO Auto-generated constructor stub
@@ -20,20 +22,24 @@ public class AdminAction extends user{
 	String create(String name,String category)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");//loading jdbc driver
-			String url="jdbc:mysql://localhost:3306/asset";
-			String user="root";
-			String pass="lokesh1999";
+//			Class.forName("com.mysql.jdbc.Driver");//loading jdbc driver
+//			String url="jdbc:mysql://localhost:3306/asset";
+//			String user="root";
+//			String pass="lokesh1999";
 			String res=null;
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);//creating database connection
-			
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);//creating database connection
+//			
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			java.sql.Connection con=ds.getConnection();
+			con.setAutoCommit(false);
 			String sql1="select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, name);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
 				res=rs.getString(1);
-			System.out.println("duplicate: "+res);
+			
 			if(res!=null)
 				return "Product already Exist";
 			
@@ -68,13 +74,18 @@ public class AdminAction extends user{
 	}
 	String addasset(String name) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost:3306/asset";
-			String user="root";
-			String pass="lokesh1999";
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String url="jdbc:mysql://localhost:3306/asset";
+//			String user="root";
+//			String pass="lokesh1999";
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			System.out.println("One");
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			System.out.println("Two");
+			java.sql.Connection con=ds.getConnection();
 			String sql="Select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, name);
@@ -125,13 +136,18 @@ public class AdminAction extends user{
 	
 	String add(String name,int count) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost:3306/asset";
-			String user="root";
-			String pass="lokesh1999";
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String url="jdbc:mysql://localhost:3306/asset";
+//			String user="root";
+//			String pass="lokesh1999";
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			System.out.println("One");
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			System.out.println("Two");
+			java.sql.Connection con=ds.getConnection();
 			String sql="Select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, name);
@@ -197,13 +213,18 @@ public class AdminAction extends user{
 	String updateStatus(String asset_id,String status)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost:3306/asset";
-			String user="root";
-			String pass="lokesh1999";
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String url="jdbc:mysql://localhost:3306/asset";
+//			String user="root";
+//			String pass="lokesh1999";
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			System.out.println("One");
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			System.out.println("Two");
+			java.sql.Connection con=ds.getConnection();
 			con.setAutoCommit(false);
 			String sql="Select max(TransID) from status";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
@@ -266,13 +287,18 @@ public class AdminAction extends user{
 	{
 		
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url="jdbc:mysql://localhost:3306/asset";
-			String user="root";
-			String pass="lokesh1999";
+//			Class.forName("com.mysql.jdbc.Driver");
+//			String url="jdbc:mysql://localhost:3306/asset";
+//			String user="root";
+//			String pass="lokesh1999";
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			System.out.println("One");
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			System.out.println("Two");
+			java.sql.Connection con=ds.getConnection();
 			con.setAutoCommit(false);//Do not Auto commit
 			String sql="Select max(TransID) from location";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);

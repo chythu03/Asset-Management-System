@@ -1,15 +1,20 @@
 package controller;
 
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+import java.sql.*;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.PreparedStatement;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import model.user;
 
 public class AuditorAction extends user{
-
+	Context ctx;
+    DataSource ds;
+    Connection con;
+    Statement stmt;
+    ResultSet rs;
+	
 	String function;
 	public AuditorAction(int id, String name, String actor) {
 		super(id, name, actor);
@@ -18,13 +23,17 @@ public class AuditorAction extends user{
 	}
 	String addasset(String name) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+/*			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
-			String pass="lokesh1999";
+			String pass="lokesh1999";*/
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			//Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset"); 
+			 con=ds.getConnection();
+			
 			String sql="Select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, name);
@@ -74,13 +83,17 @@ public class AuditorAction extends user{
 	
 	String add(String name,int count) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+/*			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
-			String pass="lokesh1999";
+			String pass="lokesh1999";*/
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			 con=ds.getConnection();
+			
 			String sql="Select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, name);
@@ -146,14 +159,18 @@ public class AuditorAction extends user{
 	String updateStatus(String asset_id,String status)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+		/*	Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
-			String pass="lokesh1999";
+			String pass="lokesh1999";*/
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset"); 
+			 con=ds.getConnection();
 			con.setAutoCommit(false);
+			
 			String sql="Select max(TransID) from status";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
@@ -214,13 +231,16 @@ public class AuditorAction extends user{
 	String updateLocation(String asset_id,String location,String room)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			/*Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
-			String pass="lokesh1999";
+			String pass="lokesh1999";*/
 			String res="error occured";
 			String id="";
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			 con=ds.getConnection();
 			con.setAutoCommit(false);
 			String sql="Select max(TransID) from location";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
@@ -283,12 +303,17 @@ public class AuditorAction extends user{
 	String remove(String asset_id)
 	{
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+/*			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/asset";
 			String user="root";
-			String pass="lokesh1999";
+			String pass="lokesh1999";*/
 
-			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+//			Connection con=(Connection) DriverManager.getConnection(url,user,pass);
+			ctx=new InitialContext();
+			System.out.println("One");
+			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
+			System.out.println("Two");
+			 con=ds.getConnection();
 			con.setAutoCommit(false);//do not auto commit
 			//removing asset transactions every where
 			

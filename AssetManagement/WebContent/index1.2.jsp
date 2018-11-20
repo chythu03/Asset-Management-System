@@ -1,7 +1,6 @@
-<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.*"%>
 <%@page import="java.sql.DriverManager"%>
-<%@page import="com.mysql.jdbc.PreparedStatement"%>
-<%@page import="com.mysql.jdbc.Connection"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
