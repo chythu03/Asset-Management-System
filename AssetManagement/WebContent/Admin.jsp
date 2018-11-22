@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="design1.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
 <body>
 <%
 /*public void jspInit(){
@@ -108,4 +109,6 @@ int userId=obj.getId();
         
         </div>
 </body>
+
+
 </html>

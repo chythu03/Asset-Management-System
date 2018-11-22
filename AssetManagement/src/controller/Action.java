@@ -125,18 +125,21 @@ public class Action extends HttpServlet{
 				case "ReportByAssetID":	String asset=request.getParameter("AssetId");
 										session.setAttribute("function", function);
 										session.setAttribute("asset_id", asset);
+										
 										view=request.getRequestDispatcher("Report.jsp");
 				 						view.include(request, response);	
 				 						break;
 				case "ReportByStaffID":	String staff=request.getParameter("StaffId");
 										session.setAttribute("function", function);
 										session.setAttribute("staff_id", staff);
+										
 										view=request.getRequestDispatcher("Report.jsp");
 										view.include(request, response);
 										break;
 				case "ViewByAssetID": String asset_id=request.getParameter("asset_id");
 										session.setAttribute("function", function);
 										session.setAttribute("asset_id", asset_id);
+										
 										view=request.getRequestDispatcher("ViewAssetShifting.jsp");
 										view.include(request, response);
 										break;
@@ -148,40 +151,44 @@ public class Action extends HttpServlet{
 										break;
 				case "AddAsset":  String asset2=request.getParameter("asset");
 									String res4=obj.addasset(asset2);
+									
+									view=request.getRequestDispatcher("index1.2.jsp");
+									view.include(request, response);
 									out.println("<script>");
 									out.println(" alert(\""+res4+"\");");
 									out.println("</script>");
-									view=request.getRequestDispatcher("index1.2.jsp");
-									view.include(request, response);
 									break;
 				case "Add":String asset3=request.getParameter("asset");
 							int count=Integer.parseInt(request.getParameter("count")); 
 							String res5=obj.add(asset3,count);
+							
+							view=request.getRequestDispatcher("index1.3.jsp");
+							view.include(request, response);
 							out.println("<script>");
 							out.println(" alert(\""+res5+"\");");
 							out.println("</script>");
-							view=request.getRequestDispatcher("index1.3.jsp");
-							view.include(request, response);
 							break;
 				case "UpdateStatus":String asset4=request.getParameter("asset_id");
 									String stat=request.getParameter("status");
 									String res6=obj.updateStatus(asset4, stat);
+									
+									view=request.getRequestDispatcher("index1.10.jsp");
+									view.include(request, response);
 									out.println("<script>");
 									out.println(" alert(\""+res6+"\");");
 									out.println("</script>");
-									view=request.getRequestDispatcher("index1.10.jsp");
-									view.include(request, response);
 									break;
 				case "UpdateLocation":String asset5=request.getParameter("asset_id");
 									String loc=request.getParameter("location");
 									String room=request.getParameter("room");
 									
 									String res7=obj.updateLocation(asset5,loc,room);
+									
+									view=request.getRequestDispatcher("index1.11.jsp");
+									view.include(request, response);
 									out.println("<script>");
 									out.println(" alert(\""+res7+"\");");
 									out.println("</script>");
-									view=request.getRequestDispatcher("index1.11.jsp");
-									view.include(request, response);
 									break;
 				case "ViewByDate":String frdt=request.getParameter("FrDt");
 								  String todt=request.getParameter("ToDt");
@@ -198,8 +205,11 @@ public class Action extends HttpServlet{
 									  session.setAttribute("function", function);
 									  session.setAttribute("FrDt", frdt1);
 									  session.setAttribute("ToDt", todt1);
+									  
 									  view=request.getRequestDispatcher("Report.jsp");
 										view.include(request, response);
+										System.out.println("report is:");
+										
 										break;
 				default:break;
 			}

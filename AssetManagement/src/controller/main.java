@@ -2,7 +2,7 @@ package controller;
 
 import java.sql.*;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -56,7 +56,6 @@ public class main extends HttpServlet {
 		try {
 			HttpSession session=request.getSession();
 			session.setMaxInactiveInterval(1000000);
-			PrintWriter out=response.getWriter();
 			//Class.forName("com.mysql.cj.jdbc.Driver");
 			int id=Integer.parseInt(request.getParameter("username"));
 			String password=request.getParameter("password");

@@ -31,7 +31,7 @@ public class AdminAction extends user{
 //			
 			ctx=new InitialContext();
 			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
-			java.sql.Connection con=ds.getConnection();
+			con=ds.getConnection();
 			con.setAutoCommit(false);
 			String sql1="select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
@@ -64,6 +64,7 @@ public class AdminAction extends user{
 			ps.setString(2, name);
 			ps.setString(3, category);
 			ps.executeUpdate();
+			con.commit();
 			con.close();
 			System.out.println("Record inserted");
 			return id;
@@ -85,7 +86,7 @@ public class AdminAction extends user{
 			System.out.println("One");
 			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
 			System.out.println("Two");
-			java.sql.Connection con=ds.getConnection();
+			Connection con=ds.getConnection();
 			String sql="Select prod_id from products where product=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql);
 			ps.setString(1, name);

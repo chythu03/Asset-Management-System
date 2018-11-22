@@ -53,21 +53,23 @@ public class StaffActionServ extends HttpServlet {
 					case "UpdateStatus":String asset4=request.getParameter("asset_id");
 										String stat=request.getParameter("status");
 										String res6=obj.updateStatus(asset4, stat);
+										
+										view=request.getRequestDispatcher("index3.2.jsp");
+										view.include(request, response);
 										out.println("<script>");
 										out.println(" alert(\""+res6+"\");");
 										out.println("</script>");
-										view=request.getRequestDispatcher("index3.2.jsp");
-										view.include(request, response);
 										break;
 					case "UpdateLocation":String asset5=request.getParameter("asset_id");
 										String loc=request.getParameter("location");
 										String room=request.getParameter("room");
 										String res7=obj.updateLocation(asset5,loc,room);
+										
+										view=request.getRequestDispatcher("index3.3.jsp");
+										view.include(request, response);
 										out.println("<script>");
 										out.println(" alert(\""+res7+"\");");
 										out.println("</script>");
-										view=request.getRequestDispatcher("index3.3.jsp");
-										view.include(request, response);
 										break;
 					case "ViewLocation":String id1=request.getParameter("asset_id");
 										View obj2=new View();

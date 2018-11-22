@@ -25,7 +25,6 @@ public class View {
 			ctx=new InitialContext();
 			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
 			java.sql.Connection con=ds.getConnection();
-			con.setAutoCommit(false);
 			String sql1="Select status from assets where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
@@ -57,7 +56,7 @@ public class View {
 			ctx=new InitialContext();
 			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
 			java.sql.Connection con=ds.getConnection();
-			con.setAutoCommit(false);
+
 			String sql1="Select location,room from assets where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
@@ -85,7 +84,7 @@ public class View {
 			ctx=new InitialContext();
 			ds=(DataSource)ctx.lookup("java:comp/env/jdbc/asset");
 			java.sql.Connection con=ds.getConnection();
-			con.setAutoCommit(false);
+
 			String sql1="Select * from assets where asset_id=?";
 			PreparedStatement ps=(PreparedStatement) con.prepareStatement(sql1);
 			ps.setString(1, id);
